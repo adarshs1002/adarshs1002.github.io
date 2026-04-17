@@ -2,266 +2,768 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Adarsh S</title>
+  <title>Adarsh S — Research Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg: #0c0f14;
+      --bg-card: #13181f;
+      --bg-surface: #1a2030;
+      --accent: #7dd3c0;
+      --accent-soft: rgba(125, 211, 192, 0.12);
+      --accent-dim: rgba(125, 211, 192, 0.35);
+      --text-primary: #eef0f4;
+      --text-muted: #8b96a8;
+      --text-dim: #4e5a6b;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(125, 211, 192, 0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
     }
 
-    a {
-      color: #38bdf8;
-      text-decoration: none;
+    /* ── Noise overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
     }
 
-    .container {
-      width: 90%;
-      max-width: 1000px;
-      margin: auto;
-      padding: 24px 0;
+    /* ── Grid background ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    h1, h2, h3 {
-      margin-bottom: 10px;
-    }
+    .wrap { position: relative; z-index: 1; }
 
-    .hero {
-      text-align: center;
-      padding: 50px 0 20px;
-    }
-    .hero-content {
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 10%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 40px;
+      height: 64px;
+      background: rgba(12, 15, 20, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 10%;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Radial glow behind hero */
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(125, 211, 192, 0.06) 0%, transparent 70%);
+      top: 50%;
+      right: 5%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      width: 100%;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 480px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
       flex-wrap: wrap;
     }
-    
-    .hero-text {
-      flex: 1;
-      min-width: 280px;
+
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: #0c0f14;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: opacity 0.2s, transform 0.2s;
     }
-    
-    .hero-image {
-      flex: 1;
-      display: flex;
-      justify-content: center;
+
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 12px 28px;
+      border: 1px solid var(--border-hover);
+      color: var(--accent);
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.2s;
     }
-    
-    .hero-image img {
-      width: 260px;
-      height: 260px;
+
+    .btn-ghost:hover { background: var(--accent-soft); transform: translateY(-1px); }
+
+    .hero-image-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .hero-image-frame {
+      width: 280px;
+      height: 280px;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border-hover);
+    }
+
+    .hero-image-frame img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #38bdf8;
+      filter: grayscale(20%);
     }
 
-    .hero h1 {
-      font-size: 2.5rem;
+    /* Corner accents */
+    .hero-image-frame::before,
+    .hero-image-frame::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-color: var(--accent);
+      border-style: solid;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      color: #94a3b8;
+    .hero-image-frame::before {
+      top: -4px; right: -4px;
+      border-width: 2px 2px 0 0;
     }
 
-    .buttons a {
-      display: inline-block;
-      margin: 10px;
-      padding: 10px 18px;
-      border: 1px solid #38bdf8;
-      border-radius: 6px;
+    .hero-image-frame::after {
+      bottom: -4px; left: -4px;
+      border-width: 0 0 2px 2px;
     }
 
-    .section {
-      margin-top: 30px;
+    /* ── Section layout ── */
+    section {
+      padding: 100px 10%;
+      position: relative;
     }
 
-    .projects {
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .section-num {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Projects ── */
+    .projects-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .project-card:hover { background: var(--bg-surface); }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-num {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border: 1px solid var(--border-hover);
+      color: var(--accent);
+      border-radius: 1px;
+      font-weight: 400;
+    }
+
+    /* ── Currently working on ── */
+    .current-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .current-item {
+      background: var(--bg-card);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
       gap: 20px;
+      transition: background 0.2s;
     }
 
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
+    .current-item:hover { background: var(--bg-surface); }
+
+    .current-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
     }
 
-    .tags span {
-      background: #334155;
-      padding: 5px 10px;
-      margin: 5px 5px 0 0;
-      display: inline-block;
-      border-radius: 5px;
-      font-size: 0.85rem;
+    .current-item:nth-child(2) .current-dot { animation-delay: 0.6s; }
+    .current-item:nth-child(3) .current-dot { animation-delay: 1.2s; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
-    .skills span {
-      display: inline-block;
-      margin: 5px;
-      padding: 6px 12px;
-      background: #1e293b;
-      border-radius: 5px;
+    .current-item span {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 300;
     }
 
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+    }
+
+    .skill-group {}
+
+    .skill-group-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .skill-item {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-item::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 1px;
+      background: var(--text-dim);
+    }
+
+    /* ── Background/Education ── */
+    .edu-timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .edu-item {
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    .edu-item:last-child { margin-bottom: 0; }
+
+    .edu-item::before {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--accent);
+    }
+
+    .edu-period {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    .edu-school {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .edu-degree {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 300;
+    }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 24px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--border-hover);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* ── Footer ── */
     footer {
-      text-align: center;
-      margin-top: 50px;
-      color: #64748b;
+      padding: 40px 10%;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--text-dim);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* ── Reveal animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+    .hero-name     { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+    .hero-desc     { animation: fadeUp 0.6s ease both; animation-delay: 0.3s; }
+    .hero-actions  { animation: fadeUp 0.6s ease both; animation-delay: 0.4s; }
+    .hero-image-wrap { animation: fadeUp 0.6s ease both; animation-delay: 0.35s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 6%; }
+      .nav-links { display: none; }
+      .hero { padding: 80px 6% 60px; }
+      .hero-inner { flex-direction: column-reverse; gap: 40px; }
+      .hero-image-frame { width: 200px; height: 200px; }
+      section { padding: 72px 6%; }
+      .projects-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
 </head>
-
 <body>
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">A.S</div>
+    <ul class="nav-links">
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
   <!-- HERO -->
-  <div class="container hero">
-    <div class="hero-content">
-      
+  <section class="hero" id="home">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
       <div class="hero-text">
-        <h1>Adarsh S</h1>
-        <p>Building retrieval systems to improve grounding and reasoning in LLM pipelines</p>
-        <p>Mathematics → AI | Focused on retrieval, reasoning, and knowledge graphs</p>
-  
-        <div class="buttons">
-          <a href="#projects">View Projects</a>
-          <a href="#">Download CV</a>
-          <a href="mailto:adarshsudarsanan6715@gmail.com">Contact</a>
+        <div class="hero-eyebrow">PhD Researcher &nbsp;·&nbsp; Shiv Nadar University</div>
+        <h1 class="hero-name">Adarsh<br><em>Sudarsanan</em></h1>
+        <p class="hero-desc">Building retrieval systems to improve grounding and reasoning in LLM pipelines. Mathematics → AI. Focused on knowledge graphs, retrieval, and agent architectures.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">View Work</a>
+          <a href="mailto:adarshsudarsanan6715@gmail.com" class="btn-ghost">Get in Touch</a>
         </div>
       </div>
-  
-      <div class="hero-image">
-        <img src="Adarsh.jpg" alt="Adarsh S">
+      <div class="hero-image-wrap">
+        <div class="hero-image-frame">
+          <img src="Adarsh.jpg" alt="Adarsh Sudarsanan">
+        </div>
       </div>
-  
     </div>
-  </div>
+  </section>
 
   <!-- PROJECTS -->
-  <div class="container section" id="projects">
-    <h2>Projects</h2>
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Selected Work</h2>
+    </div>
+    <div class="projects-grid">
 
-    <div class="projects">
-
-      <div class="card">
-        <h3>GraphRAG Agent</h3>
-        <p>
-          Designed a graph-based retrieval pipeline using Neo4j with entity extraction and linking across documents.
+      <div class="project-card">
+        <div class="project-num">001</div>
+        <h3 class="project-title">GraphRAG Agent</h3>
+        <p class="project-desc">
+          Designed a graph-based retrieval pipeline using Neo4j with entity extraction and linking across documents. Integrated an LLM agent to query structured graph knowledge instead of raw text retrieval — enabling multi-hop reasoning over the Mahabharata knowledge graph.
         </p>
-        <p>
-          Integrated an LLM agent to query structured graph knowledge instead of raw text retrieval.
-        </p>
-
-        <div class="tags">
-          <span>Langgraph</span>
-          <span>Neo4j</span>
-          <span>RAG</span>
-          <span>LLM</span>
-          <span>Agents</span>
+        <div class="project-tags">
+          <span class="tag">LangGraph</span>
+          <span class="tag">Neo4j</span>
+          <span class="tag">RAG</span>
+          <span class="tag">LLM Agents</span>
         </div>
       </div>
 
-      <div class="card">
-        <h3>GraphRAG Pipeline</h3>
-        <p>
-          Designed a multi-step retrieval pipeline with query decomposition and tool usage.
+      <div class="project-card">
+        <div class="project-num">002</div>
+        <h3 class="project-title">GraphRAG Pipeline</h3>
+        <p class="project-desc">
+          Multi-step retrieval pipeline with query decomposition and tool usage. Chapter-aware chunking, LLM extraction, semantic deduplication, and Neo4j ingestion with checkpoint/resume. Migrated 2,343 nodes and 7,829 relationships across AuraDB instances.
         </p>
-        <p>
-          Enabled dynamic reasoning and improved answer quality for complex queries.
-        </p>
-
-        <div class="tags">
-          <span>Neo4j</span>
-          <span>Python</span>
-          <span>LLM</span>
-          <span>RAG</span>
+        <div class="project-tags">
+          <span class="tag">Neo4j</span>
+          <span class="tag">Python</span>
+          <span class="tag">Embeddings</span>
+          <span class="tag">Knowledge Graph</span>
         </div>
       </div>
 
     </div>
-  </div>
+  </section>
 
   <!-- CURRENT WORK -->
-  <div class="container section">
-    <h2>What I'm Working On</h2>
-    <ul>
-      <li>GraphRAG pipelines with Neo4j</li>
-      <li>Agent-based query systems</li>
-      <li>Improving retrieval quality in LLM pipelines</li>
-    </ul>
-  </div>
+  <section>
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Currently Working On</h2>
+    </div>
+    <div class="current-list">
+      <div class="current-item">
+        <span class="current-dot"></span>
+        <span>GraphRAG pipelines with Neo4j — improving entity linking and multi-hop retrieval</span>
+      </div>
+      <div class="current-item">
+        <span class="current-dot"></span>
+        <span>Agent-based query systems with structured reasoning over knowledge graphs</span>
+      </div>
+      <div class="current-item">
+        <span class="current-dot"></span>
+        <span>Improving retrieval quality and grounding in LLM pipelines</span>
+      </div>
+    </div>
+  </section>
 
   <!-- SKILLS -->
-  <div class="container section">
-    <h2>Skills</h2>
-
-    <h3>Core</h3>
-    <div class="skills">
-      <span>Python</span>
-      <span>SQL</span>
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Technical Skills</h2>
     </div>
-
-    <h3>LLM & RAG</h3>
-    <div class="skills">
-      <span>LangChain</span>
-      <span>Embeddings</span>
-      <span>Vector DBs</span>
-      <span>Prompt Engineering</span>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label">Core</div>
+        <div class="skill-items">
+          <div class="skill-item">Python</div>
+          <div class="skill-item">SQL</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">LLM & RAG</div>
+        <div class="skill-items">
+          <div class="skill-item">LangChain / LangGraph</div>
+          <div class="skill-item">Embeddings</div>
+          <div class="skill-item">Vector Databases</div>
+          <div class="skill-item">Prompt Engineering</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Graph Systems</div>
+        <div class="skill-items">
+          <div class="skill-item">Neo4j</div>
+          <div class="skill-item">Graph Modelling</div>
+          <div class="skill-item">Cypher Query</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">ML Foundations</div>
+        <div class="skill-items">
+          <div class="skill-item">PyTorch</div>
+          <div class="skill-item">Scikit-learn</div>
+          <div class="skill-item">Statistical Modelling</div>
+        </div>
+      </div>
     </div>
-
-    <h3>Graph Systems</h3>
-    <div class="skills">
-      <span>Neo4j</span>
-      <span>Graph Modeling</span>
-    </div>
-
-    <h3>ML Foundations</h3>
-    <div class="skills">
-      <span>PyTorch</span>
-      <span>Scikit-learn</span>
-    </div>
-  </div>
-
-  <!-- BACKGROUND -->
-  <div class="container section">
-    <h2>Background</h2>
-    <p>
-      Mathematics graduate from IISER Tirupati with a focus on algebraic geometry and abstract structures.
-    </p>
-    <p>
-      Completed 11-month Executive Post-Graduation Certification on Data Science & AI (online) from IIT Roorkee iHUB (with Intelipaat).
-    </p>
-  </div>
+  </section>
 
   <!-- EDUCATION -->
-  <div class="container section">
-    <h2>Education</h2>
-
-    <p><strong>Shiv Nadar Institute of Eminence</strong><br>
-    PhD in Mathematics (Data Science) [2025- present]</p>
-
-    <p><strong>IISER Tirupati</strong><br>
-    BS-MS Mathematics [2019-2024] <br>
-    Thesis: Algebraic Varieties & Function Fields</p>
-  </div>
+  <section id="education">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Education & Background</h2>
+    </div>
+    <div class="edu-timeline">
+      <div class="edu-item">
+        <div class="edu-period">2025 — Present</div>
+        <div class="edu-school">Shiv Nadar Institute of Eminence</div>
+        <div class="edu-degree">PhD in Mathematics (Data Science)</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-period">2019 — 2024</div>
+        <div class="edu-school">IISER Tirupati</div>
+        <div class="edu-degree">BS-MS in Mathematics · Thesis: Algebraic Varieties &amp; Function Fields</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-period">2023 — 2024</div>
+        <div class="edu-school">IIT Roorkee iHUB (Intelipaat)</div>
+        <div class="edu-degree">Executive PG Certification in Data Science &amp; AI</div>
+      </div>
+    </div>
+  </section>
 
   <!-- CONTACT -->
-  <div class="container section">
-    <h2>Contact</h2>
-    <p>Email: adarshsudarsanan6715@gmail.com</p>
-    <p><a href="www.linkedin.com/in/adarsh-sudarsanan/">LinkedIn</a></p>
-    <p><a href="github.com/adarshs1002">GitHub</a></p>
-  </div>
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:adarshsudarsanan6715@gmail.com" class="contact-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        adarshsudarsanan6715@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/adarsh-sudarsanan/" target="_blank" class="contact-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/adarshs1002" target="_blank" class="contact-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
   <footer>
-    <p>© 2026 Adarsh S</p>
+    <span class="footer-name">Adarsh Sudarsanan</span>
+    <span class="footer-copy">© 2026</span>
   </footer>
 
+</div>
 </body>
 </html>
