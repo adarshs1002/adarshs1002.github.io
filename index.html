@@ -34,6 +34,32 @@
       text-align: center;
       padding: 50px 0 20px;
     }
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-text {
+      flex: 1;
+      min-width: 280px;
+    }
+    
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .hero-image img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #38bdf8;
+    }
 
     .hero h1 {
       font-size: 2.5rem;
@@ -96,14 +122,24 @@
 
   <!-- HERO -->
   <div class="container hero">
-    <h1>Adarsh S</h1>
-    <p>Building retrieval systems to improve grounding and reasoning in LLM pipelines</p>
-    <p>Mathematics → AI | Focused on retrieval, reasoning, and knowledge graphs</p>
-
-    <div class="buttons">
-      <a href="#projects">View Projects</a>
-      <a href="#">Download CV</a>
-      <a href="mailto:adarshsudarsanan6715@gmail.com">Contact</a>
+    <div class="hero-content">
+      
+      <div class="hero-text">
+        <h1>Adarsh S</h1>
+        <p>Building retrieval systems to improve grounding and reasoning in LLM pipelines</p>
+        <p>Mathematics → AI | Focused on retrieval, reasoning, and knowledge graphs</p>
+  
+        <div class="buttons">
+          <a href="#projects">View Projects</a>
+          <a href="#">Download CV</a>
+          <a href="mailto:adarshsudarsanan6715@gmail.com">Contact</a>
+        </div>
+      </div>
+  
+      <div class="hero-image">
+        <img src="Adarsh.jpg" alt="Adarsh S">
+      </div>
+  
     </div>
   </div>
 
@@ -208,7 +244,7 @@
     <h2>Education</h2>
 
     <p><strong>Shiv Nadar Institute of Eminence</strong><br>
-    PhD in Mathematics (Data Science)[2025- present]</p>
+    PhD in Mathematics (Data Science) [2025- present]</p>
 
     <p><strong>IISER Tirupati</strong><br>
     BS-MS Mathematics [2019-2024] <br>
