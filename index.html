@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Adarsh S</title>
+  <title>Adarsh S | LLM Systems</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -67,6 +67,14 @@
       border-radius: 10px;
     }
 
+    .card img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
     .tags span {
       background: #334155;
       padding: 5px 10px;
@@ -97,12 +105,12 @@
   <!-- HERO -->
   <div class="container hero">
     <h1>Adarsh S</h1>
-    <p>Building LLM Systems with GraphRAG & Agents</p>
-    <p>Mathematics → AI | Focused on retrieval, reasoning, and knowledge graphs</p>
+    <p>Designing retrieval systems to improve grounding and reasoning in LLM pipelines</p>
+    <p>Mathematics → AI | Focus on GraphRAG, evaluation, and agent-based systems</p>
 
     <div class="buttons">
       <a href="#projects">View Projects</a>
-      <a href="#">Download CV</a>
+      <a href="cv.pdf" download>Download CV</a>
       <a href="mailto:adarshsudarsanan6715@gmail.com">Contact</a>
     </div>
   </div>
@@ -113,97 +121,134 @@
 
     <div class="projects">
 
+      <!-- Project 1 -->
       <div class="card">
         <h3>GraphRAG with Neo4j + LLM Agents</h3>
+
         <p>
-          Built a graph-based retrieval system using Neo4j with entity linking,
-          community detection, and embedding-based retrieval.
+          Designed a graph-based retrieval pipeline using Neo4j with entity extraction and linking across documents.
         </p>
+
         <p>
-          Integrated an LLM agent to query structured graph knowledge and improve response relevance.
+          Implemented community detection to cluster related entities and improve multi-hop retrieval context.
         </p>
+
+        <p>
+          Integrated an LLM agent to query structured graph knowledge instead of raw text retrieval.
+        </p>
+
+        <p><strong>Pipeline:</strong> Chunking → Entity Extraction → Graph Construction → Graph Retrieval → LLM</p>
+
+        <p><strong>Result:</strong> Improved answer grounding on multi-hop queries compared to baseline RAG</p>
 
         <div class="tags">
           <span>Python</span>
           <span>Neo4j</span>
-          <span>RAG</span>
+          <span>GraphRAG</span>
           <span>LLM</span>
-          <span>Agents</span>
         </div>
+
+        <p><a href="#">View Code</a></p>
       </div>
 
+      <!-- Project 2 -->
       <div class="card">
         <h3>Agentic RAG Pipeline</h3>
+
         <p>
-          Designed a multi-step retrieval pipeline with query decomposition and tool usage.
+          Built a multi-step retrieval system with query decomposition and tool-based reasoning.
         </p>
+
         <p>
-          Enabled dynamic reasoning and improved answer quality for complex queries.
+          Enabled dynamic routing between retrieval strategies based on query complexity.
         </p>
+
+        <p>
+          Focused on improving answer quality for compositional and multi-part queries.
+        </p>
+
+        <p><strong>Pipeline:</strong> Query Decomposition → Tool Selection → Retrieval → Aggregation → LLM</p>
+
+        <p><strong>Result:</strong> More consistent responses on complex queries compared to single-step RAG</p>
 
         <div class="tags">
-          <span>LangChain</span>
           <span>Python</span>
-          <span>LLM</span>
+          <span>LangChain</span>
+          <span>Agents</span>
           <span>RAG</span>
         </div>
+
+        <p><a href="#">View Code</a></p>
       </div>
 
+      <!-- Project 3 -->
       <div class="card">
         <h3>RAG Evaluation System</h3>
+
         <p>
-          Developed evaluation metrics for retrieval quality and hallucination detection.
+          Developed evaluation metrics to measure retrieval quality and detect hallucinations.
         </p>
+
         <p>
-          Compared naive RAG vs GraphRAG performance.
+          Compared naive RAG and GraphRAG across different query types and failure cases.
         </p>
+
+        <p>
+          Focused on understanding when retrieval fails and how it impacts generation.
+        </p>
+
+        <p><strong>Pipeline:</strong> Query Set → Retrieval → LLM Output → Evaluation Metrics</p>
+
+        <p><strong>Result:</strong> Identified failure modes in retrieval pipelines and improved evaluation clarity</p>
 
         <div class="tags">
           <span>Python</span>
           <span>Evaluation</span>
           <span>LLM</span>
         </div>
+
+        <p><a href="#">View Code</a></p>
       </div>
 
     </div>
   </div>
 
-  <!-- CURRENT WORK -->
+  <!-- GALLERY -->
   <div class="container section">
-    <h2>What I'm Working On</h2>
-    <ul>
-      <li>GraphRAG pipelines with Neo4j</li>
-      <li>Agent-based query systems</li>
-      <li>Improving retrieval quality in LLM pipelines</li>
-    </ul>
+    <h2>Gallery</h2>
+
+    <div class="projects">
+
+      <div class="card">
+        <img src="images/graphrag.png" alt="GraphRAG Visualization">
+        <p>Graph-based retrieval pipeline</p>
+      </div>
+
+      <div class="card">
+        <img src="images/neo4j_graph.png" alt="Neo4j Graph">
+        <p>Entity relationship graph in Neo4j</p>
+      </div>
+
+    </div>
   </div>
 
   <!-- SKILLS -->
   <div class="container section">
-    <h2>Skills</h2>
+    <h2>What I Work On</h2>
 
-    <h3>Core</h3>
+    <div class="skills">
+      <span>Retrieval Systems</span>
+      <span>GraphRAG</span>
+      <span>LLM Evaluation</span>
+      <span>Agent Pipelines</span>
+    </div>
+
+    <h3>Tools</h3>
     <div class="skills">
       <span>Python</span>
       <span>SQL</span>
-    </div>
-
-    <h3>LLM & RAG</h3>
-    <div class="skills">
-      <span>LangChain</span>
-      <span>Embeddings</span>
-      <span>Vector DBs</span>
-      <span>Prompt Engineering</span>
-    </div>
-
-    <h3>Graph Systems</h3>
-    <div class="skills">
       <span>Neo4j</span>
-      <span>Graph Modeling</span>
-    </div>
-
-    <h3>ML Foundations</h3>
-    <div class="skills">
+      <span>LangChain</span>
       <span>PyTorch</span>
       <span>Scikit-learn</span>
     </div>
@@ -212,11 +257,17 @@
   <!-- BACKGROUND -->
   <div class="container section">
     <h2>Background</h2>
+
     <p>
-      Mathematics graduate from IISER Tirupati with a focus on algebraic geometry and abstract structures.
+      Mathematics graduate from IISER Tirupati with a focus on algebraic structures and abstract reasoning.
     </p>
+
     <p>
-      Currently applying mathematical reasoning to LLM systems, focusing on structured retrieval and agent-based architectures.
+      Currently working on applying mathematical structure to improve retrieval, reasoning, and evaluation in LLM systems.
+    </p>
+
+    <p>
+      Interested in how structure (graphs, decomposition, representations) can make language models more reliable.
     </p>
   </div>
 
@@ -237,6 +288,7 @@
     <h2>Contact</h2>
     <p>Email: adarshsudarsanan6715@gmail.com</p>
     <p><a href="#">LinkedIn</a></p>
+    <p><a href="#">GitHub</a></p>
   </div>
 
   <footer>
